@@ -85,8 +85,7 @@ fun AddExerciseScreen(
             ExposedDropdownMenuBox(
                 expanded = categoryExpanded,
                 onExpandedChange = { categoryExpanded = !categoryExpanded },
-                modifier = Modifier
-                    .weight(2f)
+                modifier = Modifier.weight(1f)
             ) {
                 TextField(
                     readOnly = true,
@@ -120,19 +119,15 @@ fun AddExerciseScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Group + Subgroup row
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        // Group
+        Row(modifier = Modifier.fillMaxWidth()) {
             // Group dropdown (depends on selected category)
             ExposedDropdownMenuBox(
                 expanded = groupExpanded,
                 onExpandedChange = {
                     if (selectedCategory != null) groupExpanded = !groupExpanded
                 },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp)
+                modifier = Modifier.weight(1f)
             ) {
                 TextField(
                     readOnly = true,
@@ -162,7 +157,11 @@ fun AddExerciseScreen(
                     }
                 }
             }
+        }
 
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Row(modifier = Modifier.fillMaxWidth()) {
             // Subgroup dropdown (depends on selected group)
             ExposedDropdownMenuBox(
                 expanded = subgroupExpanded,
@@ -171,9 +170,7 @@ fun AddExerciseScreen(
                         subgroupExpanded = !subgroupExpanded
                     }
                 },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp)
+                modifier = Modifier.weight(1f)
             ) {
                 TextField(
                     readOnly = true,
