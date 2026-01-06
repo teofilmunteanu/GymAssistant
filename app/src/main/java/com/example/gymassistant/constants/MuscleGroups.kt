@@ -5,17 +5,25 @@ enum class MuscleGroup {
 }
 
 enum class ShoulderMuscle {
+    DELTOIDS,
+    ROTATOR_CUFF
+}
+
+enum class DeltoidMuscle {
     ANTERIOR_DELTOID,
     LATERAL_DELTOID,
     POSTERIOR_DELTOID
 }
 
-enum class ChestMuscle {
-    PECTORALIS_MAJOR,
-    PECTORALIS_MINOR
+enum class RotatorCuffMuscle {
+    SUPRASPINATUS, // Abduction
+    INFRASPINATUS, // External rotation
+    TERES_MINOR, // External rotation
+    TERES_MAJOR, // Adduction and internal rotation
+    SUBSCAPULARIS // Internal rotation
 }
 
-enum class MajorPecsMuscle {
+enum class ChestMuscle {
     CLAVICULAR_PECTORALIS_MAJOR, // Upper Chest
     STERNAL_PECTORALIS_MAJOR, // Mid Chest
     ABDOMINAL_PECTORALIS_MAJOR // Lower Chest
@@ -23,11 +31,15 @@ enum class MajorPecsMuscle {
 
 enum class BackMuscle {
     TRAPEZIUS,
-    TERES_MAJOR,
-    INFRASPINATUS,
-    LATISSIMUS_DORSI,
     RHOMBOIDS,
+    LATISSIMUS_DORSI,
     ERECTOR_SPINAE
+}
+
+enum class TrapeziusMuscle {
+    TRAPEZIUS_UPPER,
+    TRAPEZIUS_MIDDLE,
+    TRAPEZIUS_LOWER
 }
 
 enum class LatsMuscle {
@@ -112,11 +124,13 @@ val muscleHierarchy: Map<Enum<*>, List<Enum<*>>> = mapOf(
     MuscleGroup.CORE to CoreMuscle.entries,
     MuscleGroup.LEGS to LegMuscle.entries,
 
+    // Shoulder subgroups
+    ShoulderMuscle.DELTOIDS to DeltoidMuscle.entries,
+    ShoulderMuscle.ROTATOR_CUFF to RotatorCuffMuscle.entries,
+
     // Back subgroups
     BackMuscle.LATISSIMUS_DORSI to LatsMuscle.entries,
-
-    // Chest subgroups
-    ChestMuscle.PECTORALIS_MAJOR to MajorPecsMuscle.entries,
+    BackMuscle.TRAPEZIUS to TrapeziusMuscle.entries,
 
     // Arm subgroups
     ArmMuscle.BICEPS to BicepsMuscle.entries,
@@ -132,57 +146,3 @@ val muscleHierarchy: Map<Enum<*>, List<Enum<*>>> = mapOf(
     LegMuscle.CALVES to CalfMuscle.entries,
     LegMuscle.GLUTEUS to GlutealMuscle.entries
 )
-
-
-// OLD
-//data class MuscleNode<T>(
-//    val name: T,                              // The name is now an enum value
-//    val children: List<MuscleNode<*>> = listOf() // Children can hold any type of MuscleNode
-//)
-//
-//val muscleHierarchy = listOf(
-//    MuscleNode(
-//        MuscleGroup.CHEST, listOf(
-//            MuscleNode(
-//                ChestMuscles.UPPER_CHEST, listOf(
-//                    MuscleNode(UpperChestMuscles.CLAVICULAR_PECTORALIS_MAJOR)
-//                )
-//            ),
-//            MuscleNode(
-//                ChestMuscles.MID_CHEST, listOf(
-//                    MuscleNode(MidChestMuscles.STERNAL_PECTORALIS_MAJOR)
-//                )
-//            ),
-//            MuscleNode(
-//                ChestMuscles.LOWER_CHEST, listOf(
-//                    MuscleNode(LowerChestMuscles.ABDOMINAL_PECTORALIS_MAJOR)
-//                )
-//            )
-//        )
-//    ),
-//    MuscleNode(
-//        MuscleGroup.ARMS, listOf(
-//            MuscleNode(
-//                ArmMuscles.BICEPS, listOf(
-//                    MuscleNode(BicepsMuscles.SHORT_HEAD),
-//                    MuscleNode(BicepsMuscles.LONG_HEAD),
-//                    MuscleNode(BicepsMuscles.BRACHIALIS)
-//                )
-//            ),
-//            MuscleNode(
-//                ArmMuscles.TRICEPS, listOf(
-//                    MuscleNode(TricepsMuscles.LONG_HEAD),
-//                    MuscleNode(TricepsMuscles.LATERAL_HEAD),
-//                    MuscleNode(TricepsMuscles.MEDIAL_HEAD)
-//                )
-//            ),
-//            MuscleNode(
-//                ArmMuscles.FOREARMS, listOf(
-//                    MuscleNode(ForearmMuscles.FLEXOR_CARPI_RADIALIS),
-//                    MuscleNode(ForearmMuscles.EXTENSOR_CARPI_ULNARIS)
-//                )
-//            )
-//        )
-//    )
-//)
-
